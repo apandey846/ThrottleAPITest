@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 MAX_THRESHOLD = 100
 CURRENT_REQUEST_COUNT = 0
 TMIN = datetime.datetime.now()
+SERVER_LEVEL_TIME_WINDOW = 600 #in seconds
+
+USER_LEVEL_TIME_WINDOW = 60 #in seconds
 
 
 # Application definition

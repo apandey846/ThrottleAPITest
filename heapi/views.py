@@ -23,11 +23,11 @@ class MyApiView(APIView):
     	user = HeUser.objects.filter(username="TestUser1")[0]
     	if user:	
 	        diff = datetime.datetime.now() - user.tmin.replace(tzinfo=None)
-	        if user.hit_count < settings.MAX_THRESHOLD and diff.seconds <=60 :
+	        if user.hit_count < settings.MAX_THRESHOLD and diff.seconds <=settings.USER_LEVEL_TIME_WINDOW :
 	            user.hit_count = user.hit_count + 1
 	            print "Current count limit :"+str(user.hit_count)
 	            user.save()
-	        elif diff.seconds > 60:
+	        elif diff.seconds > settings.USER_LEVEL_TIME_WINDOW:
 	                print "Before resetting count limit : "+str(user.hit_count)
 	                print "Seconds : "+ str(diff.seconds)
 	                user.tmin = datetime.datetime.now()

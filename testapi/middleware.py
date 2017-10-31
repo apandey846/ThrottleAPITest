@@ -10,10 +10,10 @@ class ThrowttleMiddleware(object):
     """
     def process_request(self, request):
         diff = datetime.datetime.now() - settings.TMIN
-        if settings.CURRENT_REQUEST_COUNT < settings.MAX_THRESHOLD and diff.seconds <=600 :
+        if settings.CURRENT_REQUEST_COUNT < settings.MAX_THRESHOLD and diff.seconds <= settings.SERVER_LEVEL_TIME_WINDOW:
             settings.CURRENT_REQUEST_COUNT = settings.CURRENT_REQUEST_COUNT+1
             print "Current count limit :"+str(settings.CURRENT_REQUEST_COUNT)
-        elif diff.seconds > 600:
+        elif diff.seconds > settings.SERVER_LEVEL_TIME_WINDOW:
                 print "Before resetting count limit : "+str(settings.CURRENT_REQUEST_COUNT)
                 print "Seconds : "+ str(diff.seconds)
                 settings.TMIN = datetime.datetime.now()
